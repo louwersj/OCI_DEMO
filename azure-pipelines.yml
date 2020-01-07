@@ -13,7 +13,6 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-steps:
 - script: version: $(Build.SourceVersion)
   displayName: 'show the version'
 

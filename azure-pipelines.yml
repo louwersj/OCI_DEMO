@@ -13,7 +13,7 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: echo version $(env:TF_VAR_SOURCE_VERSION)
+- script: echo version $env:TF_VAR_SOURCE_VERSION
   displayName: 'show the version'
   env: 
     TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)

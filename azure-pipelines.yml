@@ -13,6 +13,10 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+steps:
+- script: version: $(Build.SourceVersion)
+  displayName: 'show the version'
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml

@@ -15,7 +15,8 @@ steps:
 
 - script: echo version $env:TF_VAR_SOURCE_VERSION
   displayName: 'show the version'
-  env: TF_VAR_SOURCE_VERSION : $(Build.SourceVersion)
+  env: 
+    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.

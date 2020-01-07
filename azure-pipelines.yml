@@ -13,8 +13,9 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: echo version $(Build.SourceVersion)
+- script: echo version $($env:TF_VAR_SOURCE_VERSION)
   displayName: 'show the version'
+  env: TF_VAR_SOURCE_VERSION : $(Build.SourceVersion)
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.

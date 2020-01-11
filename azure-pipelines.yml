@@ -21,16 +21,16 @@ steps:
 - script: OCI deployment terraform init
   displayName: 'terraform'
 
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        
-        terraform init
-        
-        terraform plan
-      workingDirectory: './deployment/oci/terraform/'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      terraform init
+      
+      terraform plan
+    workingDirectory: './deployment/oci/terraform/'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.

@@ -22,6 +22,7 @@ steps:
 - script: |
     terraform init
     terraform version
+    pwd
   displayName: 'terraform'
   env: 
     TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)

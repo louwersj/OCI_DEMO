@@ -20,11 +20,19 @@ steps:
     TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
 
 - script: |
-    terraform init
+    echo "running terraform version to ensure we have the used version in the logfile"
     terraform version
-    pwd
-  displayName: 'terraform'
-  workingDirectory: ./deployment/environment/terraform/
+
+    echo "running terraform init to ensure all providers are being initialized"
+    terraform init
+
+    echo "Running terraform plan to ensure we have a plannend action shown in the logs"
+    terraform plan
+
+  displayName: 
+    'Oracle OCI Terraform deployment'
+  workingDirectory: 
+    "./deployment/environment/terraform/"
   env: 
     TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
 

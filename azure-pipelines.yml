@@ -1,7 +1,8 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Example pipeline for OCI / Terraform
+# This pipeline is used as a simple example to showcase how you can use Oracle
+# OCI in combination with Terraform to deploy applications and infrastructure 
+# by leveraging Azure DevOps. This pipeline is intended as an example and should
+# not be used in any production environment. 
 
 trigger:
 - master
@@ -11,13 +12,13 @@ pool:
 
 steps:
 
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+#- script: echo Hello, world!
+#  displayName: 'Run a one-line script'
 
-- script: echo version $TF_VAR_SOURCE_VERSION
-  displayName: 'show the version'
-  env: 
-    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
+#- script: echo version $TF_VAR_SOURCE_VERSION
+#  displayName: 'show the version'
+#  env: 
+#    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
 
 - script: |
     echo "running terraform version to ensure we have the used version in the logfile"
@@ -34,11 +35,17 @@ steps:
   workingDirectory: 
     "./deployment/environment/terraform/"
   env: 
-    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
+    # TF_VAR_ is the standard notation for system variables used by Terraform
+    #
+    # The following variables are used:
+    # TF_VAR_SOURCE_VERSION used as a UID based upon the source version in Github.  
+    # TF_VAR_
+    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion) 
+     
 
 
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+#- script: |
+#    echo Add other tasks to build, test, and deploy your project.
+#    echo See https://aka.ms/yaml
+#  displayName: 'Run a multi-line script'

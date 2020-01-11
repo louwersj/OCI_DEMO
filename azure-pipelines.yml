@@ -10,17 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: echo version $TF_VAR_SOURCE_VERSION
-  displayName: 'show the version'
-  env: 
-    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
-
-- script: OCI deployment terraform init
-  displayName: 'terraform'
-
 - task: Bash@3
   inputs:
     targetType: 'inline'
@@ -31,6 +20,20 @@ steps:
       
       terraform plan
     workingDirectory: './deployment/oci/terraform/'
+
+
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: echo version $TF_VAR_SOURCE_VERSION
+  displayName: 'show the version'
+  env: 
+    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
+
+- script: terraform
+  displayName: 'terraform'
+
+
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.

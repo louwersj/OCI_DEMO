@@ -24,6 +24,7 @@ steps:
     terraform version
     pwd
   displayName: 'terraform'
+  workingDirectory: ./deployment/environment/terraform/
   env: 
     TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
 

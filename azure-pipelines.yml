@@ -19,7 +19,7 @@ steps:
       terraform init
       
       terraform plan
-    workingDirectory: './deployment/oci/terraform/'
+    #workingDirectory: './deployment/oci/terraform/'
 
 
 - script: echo Hello, world!

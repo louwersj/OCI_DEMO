@@ -64,6 +64,9 @@ steps:
     echo "**** Running terraform version to ensure we have the used version in the logfile."
     terraform version
 
+    echo "*** Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible "
+    terraform 0.12upgrade -yes 
+    
     echo "**** Running terraform init to ensure all providers are being initialized."
     terraform init
 

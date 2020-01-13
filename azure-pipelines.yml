@@ -35,8 +35,11 @@ pool:
 
 steps:
 
-#- script: echo Hello, world!
-#  displayName: 'Run a one-line script'
+- script: echo "test" > /tmp/test1.txt
+  displayName: 'step 1'
+
+- script: cat /tmp/test1.txt
+  displayName: 'step 2'
 
 #- script: echo version $TF_VAR_SOURCE_VERSION
 #  displayName: 'show the version'

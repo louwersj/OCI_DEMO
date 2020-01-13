@@ -46,7 +46,7 @@ steps:
 # the Azure DevOps var oci_private_key_path. Var oci_private_key_path will 
 # be mapped to sys.var TF_VAR_private_key_path in the Terraform deployment 
 # step to ensure Terraform can use it internally during the interaction 
-# with Oracle OCI. 
+# with Oracle OCI
 - script: |
 
     echo $(pemfile.secureFilePath) $(oci_private_key_path)

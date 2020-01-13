@@ -41,19 +41,8 @@ steps:
   inputs:
     secureFile: 'oci_api_key.pem'
 
-# Ensure the private key (stored as a secret var in Azure Devops under the
-# name oci_private_key) will be stored in a temp file which is defined in 
-# the Azure DevOps var oci_private_key_path. Var oci_private_key_path will 
-# be mapped to sys.var TF_VAR_private_key_path in the Terraform deployment 
-# step to ensure Terraform can use it internally during the interaction 
-# with Oracle OCI
+# Check if the secure .pem file is a valid file
 - script: |
-
-    cp $(pemfile.secureFilePath) $(oci_private_key_path)
-
-    echo "**** Showing the wc -c length of the key for debug purposes."
-    wc -c "$(oci_private_key_path)"
-
     echo "**** Showing the md5 checksum of the key for debug purposes."
     md5sum "$(oci_private_key_path)"
 
@@ -61,7 +50,7 @@ steps:
     openssl rsa -noout -check -in "$(oci_private_key_path)"
 
 
-  displayName: 'OCI - prepare private key'
+  displayName: 'OCI - check private key'
   env:
     TF_VAR_private_key_path: $(oci_private_key_path)
 
@@ -91,7 +80,7 @@ steps:
     # TF_VAR_SOURCE_VERSION   : UID based upon the source version in Github.  
     # TF_VAR_private_key_path : path to the .pem private key
     TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
-    TF_VAR_private_key_path: $(oci_private_key_path)
+    TF_VAR_private_key_path: $(pemfile.secureFilePath)
     TF_VAR_tenancy_ocid: $(oci_tenancy_ocid)
     TF_VAR_compartment_ocid: $(oci_compartment_ocid)
     TF_VAR_region: $(oci_region)

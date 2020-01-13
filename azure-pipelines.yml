@@ -67,9 +67,6 @@ steps:
     echo "**** Running terraform init to ensure all providers are being initialized."
     terraform init
 
-    echo "**** Running terraform refresh to get the current state in Oracle Cloud (OCI)."
-    terraform refresh
-
     echo "**** Running terraform plan to ensure we have a plannend action shown in the logs."
     terraform plan
 

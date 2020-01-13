@@ -18,7 +18,7 @@ provider "oci" {
 }
 
 resource "oci_identity_compartment" "deployment_root_compartment" {
-    compartment_id = "$var.compartment_ocid"
+    compartment_id = $var.compartment_ocid
     description = "Compartment test1"
     name = "test1"
 }

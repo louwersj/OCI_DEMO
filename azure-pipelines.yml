@@ -59,7 +59,7 @@ steps:
     echo "**** Running terraform version to ensure we have the used version in the logfile."
     terraform version
 
-    echo ""**** Running terraform init to ensure all providers are being initialized."
+    echo "**** Running terraform init to ensure all providers are being initialized."
     terraform init
 
     echo ""**** Running terraform plan to ensure we have a plannend action shown in the logs."

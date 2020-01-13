@@ -35,24 +35,13 @@ pool:
 
 steps:
 
+# Download the .pem file used to auth. against the OCI. This file is 
+# stored as a secure file within azure devops. 
 - task: DownloadSecureFile@1
   name: pemfile
   displayName: 'download the pem file'
   inputs:
     secureFile: 'oci_api_key.pem'
-
-# Check if the secure .pem file is a valid file
-- script: |
-    echo "**** Showing the md5 checksum of the key for debug purposes."
-    md5sum "$(oci_private_key_path)"
-
-    echo "**** Showing the md5 checksum of the key for debug purposes."
-    openssl rsa -noout -check -in "$(oci_private_key_path)"
-
-
-  displayName: 'OCI - check private key'
-  env:
-    TF_VAR_private_key_path: $(oci_private_key_path)
 
 
 - script: |

@@ -35,11 +35,16 @@ pool:
 
 steps:
 
-- script: echo "test" > /tmp/test1.txt
+
+- script: cat "abc123" > $TF_VAR_private_key_path
+  displayName: 'OCI - prepare private key'
+  env:
+    TF_VAR_private_key_path: $(oci_private_key_path)
+
+
+- script: cat $TF_VAR_private_key_path
   displayName: 'step 1'
 
-- script: cat /tmp/test1.txt
-  displayName: 'step 2'
 
 #- script: echo version $TF_VAR_SOURCE_VERSION
 #  displayName: 'show the version'
@@ -57,7 +62,7 @@ steps:
     terraform plan
 
   displayName: 
-    'Oracle OCI Terraform deployment'
+    'OCI - Terraform deployment'
   workingDirectory: 
     "./deployment/environment/terraform/"
   env: 

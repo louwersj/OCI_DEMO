@@ -15,3 +15,9 @@ provider "oci" {
   private_key_path = "${var.private_key_path}"
   private_key_password = "${var.private_key_password}"
 }
+
+resource "oci_identity_compartment" "deployment_root_compartment" {
+    compartment_id = "${var.compartment_ocid}"
+    description = "Compartment test1"
+    name = "test1"
+}

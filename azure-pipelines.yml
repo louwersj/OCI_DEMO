@@ -48,11 +48,7 @@ steps:
 # step to ensure Terraform can use it internally during the interaction 
 # with Oracle OCI. 
 - script: |
-    #echo $(oci_private_key) > $(oci_private_key_path)
 
-    echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
-    sudo chown root:root $(caCertificate.secureFilePath)
-    sudo chmod a+r $(caCertificate.secureFilePath)
     sudo cp $(caCertificate.secureFilePath) $(oci_private_key_path)
     #sudo ln -s -t /etc/ssl/certs/ $(caCertificate.secureFilePath)
 

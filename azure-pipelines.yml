@@ -36,7 +36,7 @@ pool:
 steps:
 
 
-- script: cat "abc123" > $TF_VAR_private_key_path
+- script: echo "abc123" > $TF_VAR_private_key_path
   displayName: 'OCI - prepare private key'
   env:
     TF_VAR_private_key_path: $(oci_private_key_path)

@@ -49,7 +49,7 @@ steps:
 # with Oracle OCI. 
 - script: |
 
-    cp $(caCertificate.secureFilePath) $(oci_private_key_path)
+    echo $(caCertificate.secureFilePath) $(oci_private_key_path)
 
     echo "**** Showing the wc -c length of the key for debug purposes."
     wc -c "$(oci_private_key_path)"

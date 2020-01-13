@@ -36,13 +36,13 @@ pool:
 steps:
 
 
-- script: echo "abc123" > $TF_VAR_private_key_path
+- script: echo $(oci_private_key) > $(oci_private_key_path)
   displayName: 'OCI - prepare private key'
   env:
     TF_VAR_private_key_path: $(oci_private_key_path)
 
 
-- script: cat $(oci_private_key_path)
+- script: wc -c $(oci_private_key_path)
   displayName: 'step 1'
 
 
@@ -69,9 +69,18 @@ steps:
     # TF_VAR_ is the standard notation for system variables used by Terraform
     #
     # The following variables are used:
-    # TF_VAR_SOURCE_VERSION used as a UID based upon the source version in Github.  
-    # TF_VAR_
-    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion) 
+    # TF_VAR_SOURCE_VERSION   : UID based upon the source version in Github.  
+    # TF_VAR_private_key_path : path to the .pem private key
+    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
+    TF_VAR_private_key_path: $(oci_private_key_path)
+    TF_VAR_tenancy_ocid: $(oci_tenancy_ocid)
+    TF_VAR_compartment_ocid: $(oci_compartment_ocid)
+    TF_VAR_region: $(oci_region)
+    TF_VAR_private_key_password: $(oci_private_key_password)
+    TF_VAR_fingerprint: $(oci_fingerprint)
+    TF_VAR_user_ocid: $(oci_user_ocid)
+
+
      
 
 

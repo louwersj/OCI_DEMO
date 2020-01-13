@@ -46,7 +46,8 @@ steps:
   env:
     TF_VAR_private_key_path: $(oci_private_key_path)
 
-
+- script: wc -c "$(oci_private_key_path)"
+  displayName: 'OCI - check key length'
 
 - script: |
     echo "running terraform version to ensure we have the used version in the logfile"

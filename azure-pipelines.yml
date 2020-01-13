@@ -48,7 +48,13 @@ steps:
 # step to ensure Terraform can use it internally during the interaction 
 # with Oracle OCI. 
 - script: |
-    echo $(oci_private_key) > $(oci_private_key_path)
+    #echo $(oci_private_key) > $(oci_private_key_path)
+
+    echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
+    sudo chown root:root $(caCertificate.secureFilePath)
+    sudo chmod a+r $(caCertificate.secureFilePath)
+    sudo cp $(caCertificate.secureFilePath) $(oci_private_key_path)
+    #sudo ln -s -t /etc/ssl/certs/ $(caCertificate.secureFilePath)
 
     echo "**** Showing the wc -c length of the key for debug purposes."
     wc -c "$(oci_private_key_path)"
@@ -58,6 +64,7 @@ steps:
 
     echo "**** Showing the md5 checksum of the key for debug purposes."
     openssl rsa -noout -check -in "$(oci_private_key_path)"
+
 
   displayName: 'OCI - prepare private key'
   env:

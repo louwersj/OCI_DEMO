@@ -4,6 +4,7 @@ variable "fingerprint" {}
 variable "region" {}
 variable "private_key_path" {}
 variable "private_key_password" {}
+variable "compartment_ocid" {}
 
 
 

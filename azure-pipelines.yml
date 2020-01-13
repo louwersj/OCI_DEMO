@@ -44,10 +44,10 @@ steps:
 - script: |
     echo $(oci_private_key) > $(oci_private_key_path)
 
-    echo "showing the wc -c length of the key for debug purposes."
+    echo ""**** Showing the wc -c length of the key for debug purposes."
     wc -c "$(oci_private_key_path)"
 
-    echo "showing the md5 checksum of the key for debug purposes."
+    echo ""**** Showing the md5 checksum of the key for debug purposes."
     md5sum "$(oci_private_key_path)"
 
   displayName: 'OCI - prepare private key'
@@ -56,13 +56,13 @@ steps:
 
 
 - script: |
-    echo "running terraform version to ensure we have the used version in the logfile."
+    echo "**** Running terraform version to ensure we have the used version in the logfile."
     terraform version
 
-    echo "running terraform init to ensure all providers are being initialized."
+    echo ""**** Running terraform init to ensure all providers are being initialized."
     terraform init
 
-    echo "Running terraform plan to ensure we have a plannend action shown in the logs."
+    echo ""**** Running terraform plan to ensure we have a plannend action shown in the logs."
     terraform plan
 
   displayName: 

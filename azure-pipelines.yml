@@ -35,21 +35,18 @@ pool:
 
 steps:
 
-
+# Ensure the private key (stored as a secret var in Azure Devops under the
+# name oci_private_key) will be stored in a temp file which is defined in 
+# the Azure DevOps var oci_private_key_path. Var oci_private_key_path will 
+# be mapped to sys.var TF_VAR_private_key_path in the Terraform deployment 
+# step to ensure Terraform can use it internally during the interaction 
+# with Oracle OCI. 
 - script: echo $(oci_private_key) > $(oci_private_key_path)
   displayName: 'OCI - prepare private key'
   env:
     TF_VAR_private_key_path: $(oci_private_key_path)
 
 
-- script: wc -c $(oci_private_key_path)
-  displayName: 'step 1'
-
-
-#- script: echo version $TF_VAR_SOURCE_VERSION
-#  displayName: 'show the version'
-#  env: 
-#    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
 
 - script: |
     echo "running terraform version to ensure we have the used version in the logfile"
@@ -79,13 +76,3 @@ steps:
     TF_VAR_private_key_password: $(oci_private_key_password)
     TF_VAR_fingerprint: $(oci_fingerprint)
     TF_VAR_user_ocid: $(oci_user_ocid)
-
-
-     
-
-
-
-#- script: |
-#    echo Add other tasks to build, test, and deploy your project.
-#    echo See https://aka.ms/yaml
-#  displayName: 'Run a multi-line script'

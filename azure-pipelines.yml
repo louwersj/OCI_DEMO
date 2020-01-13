@@ -44,10 +44,10 @@ steps:
 - script: |
     echo $(oci_private_key) > $(oci_private_key_path)
 
-    echo ""**** Showing the wc -c length of the key for debug purposes."
+    echo "**** Showing the wc -c length of the key for debug purposes."
     wc -c "$(oci_private_key_path)"
 
-    echo ""**** Showing the md5 checksum of the key for debug purposes."
+    echo "**** Showing the md5 checksum of the key for debug purposes."
     md5sum "$(oci_private_key_path)"
 
   displayName: 'OCI - prepare private key'

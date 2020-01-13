@@ -49,6 +49,9 @@ steps:
 - script: wc -c "$(oci_private_key_path)"
   displayName: 'OCI - check key length'
 
+- script: md5 "$(oci_private_key_path)"
+  displayName: 'OCI - md5 key'
+
 - script: |
     echo "running terraform version to ensure we have the used version in the logfile"
     terraform version

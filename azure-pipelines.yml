@@ -35,6 +35,7 @@ pool:
 
 steps:
 
+# ---------------------------------------------------------------------
 # Download the .pem file used to auth. against the OCI. This file is 
 # stored as a secure file within azure devops. 
 - task: DownloadSecureFile@1
@@ -44,18 +45,19 @@ steps:
     secureFile: 'oci_api_key.pem'
 
 
-
-# start the terraform deployment from a multi-line script. We will be using
-# a number of steps to ensure that the init and deployment of the .tf plan 
-# is done in the right way. Additional action is to ensure we have the right 
-# variables set in a way that it is usable for terraform.
+# ---------------------------------------------------------------------
+# start the terraform deployment from a multi-line script. We will be 
+# using a number of steps to ensure that the init and deployment of the 
+# .tf plan is done in the right way. Additional action is to ensure we 
+# have the right variables set in a way that it is usable for terraform.
 # TF_VAR_ is the standard notation for system variables used by Terraform
 #
 # The following variables are used:
 # TF_VAR_SOURCE_VERSION   : UID based upon the source version in Github.  
-# TF_VAR_private_key_path : path to the .pem private key based upon the task
-#                           for downloading the secure file variable which is
-#                           the actual path; $(pemfile.secureFilePath)
+# TF_VAR_private_key_path : path to the .pem private key based upon the 
+#                           task for downloading the secure file variable 
+#                           which is the actual path; 
+#                           $(pemfile.secureFilePath)
 # TF_VAR_tenancy_ocid .   : xxx
 
 - script: |

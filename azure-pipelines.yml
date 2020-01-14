@@ -53,12 +53,20 @@ steps:
 # TF_VAR_ is the standard notation for system variables used by Terraform
 #
 # The following variables are used:
-# TF_VAR_SOURCE_VERSION   : UID based upon the source version in Github.  
-# TF_VAR_private_key_path : path to the .pem private key based upon the 
-#                           task for downloading the secure file variable 
-#                           which is the actual path; 
-#                           $(pemfile.secureFilePath)
-# TF_VAR_tenancy_ocid .   : xxx
+# TF_VAR_SOURCE_VERSION   : UID based upon the source version in Github
+#                           value is derived from $(Build.SourceVersion)
+# TF_VAR_private_key_path : path to the .pem private key. Value derived 
+#                           from $(pemfile.secureFilePath)
+# TF_VAR_tenancy_ocid .   : UID to identify the tenancy to be used for 
+#                           the deployment. Value is derived from the
+#                           variable $(oci_tenancy_ocid) defined as a 
+#                           Azure DevOps pipeline var.
+# TF_VAR_compartment_ocid : UID to identiy the deployment compartment to
+#                           be used for the deployment. The value is 
+#                           derived from the variable 
+#                           $(oci_compartment_ocid) defined as a Azure 
+#                           DevOps pipeline var.
+
 
 - script: |
     echo " "
@@ -86,7 +94,7 @@ steps:
   workingDirectory: 
     "./deployment/environment/terraform/"
   env: 
-    TF_VAR_SOURCE_VERSION: $(Build.SourceVersion)
+    TF_VAR_source_version: $(Build.SourceVersion)
     TF_VAR_private_key_path: $(pemfile.secureFilePath)
     TF_VAR_tenancy_ocid: $(oci_tenancy_ocid)
     TF_VAR_compartment_ocid: $(oci_compartment_ocid)

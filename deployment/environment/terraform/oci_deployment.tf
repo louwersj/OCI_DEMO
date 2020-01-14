@@ -21,11 +21,12 @@ provider "oci" {
 
 resource "oci_identity_compartment" "deployment_root_compartment" {
     compartment_id = "${var.compartment_ocid}"
-    description = "Automatic test compartment for commit: ${var.source_version}"
+    description = "Automatic test compartment for build: ${var.source_version}"
     name = "auto_test_${var.source_version}"
     freeform_tags =  {
-           environment = "test"
-           build = "${var.source_version}"
-           application = "OCI_DEMO"
+           application_environment = "test"
+           application_name = "OCI_DEMO"
+           git_build = "${var.source_version}"
+           git_branch = "master"
    }
 }

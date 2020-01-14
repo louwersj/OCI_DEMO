@@ -5,6 +5,8 @@ variable "region" {}
 variable "private_key_path" {}
 variable "private_key_password" {}
 variable "compartment_ocid" {}
+variable "source_version" {}
+
 
 
 
@@ -19,6 +21,6 @@ provider "oci" {
 
 resource "oci_identity_compartment" "deployment_root_compartment" {
     compartment_id = "${var.compartment_ocid}"
-    description = "Compartment test1"
-    name = "test1"
+    description = "Automatic test compartment for commit: ${var.source_version}"
+    name = "auto_test_${var.source_version}"
 }

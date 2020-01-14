@@ -23,4 +23,9 @@ resource "oci_identity_compartment" "deployment_root_compartment" {
     compartment_id = "${var.compartment_ocid}"
     description = "Automatic test compartment for commit: ${var.source_version}"
     name = "auto_test_${var.source_version}"
+    freeform_tags =  {
+           environment = "test"
+           build = "${var.source_version}"
+           application = "OCI_DEMO"
+   }
 }

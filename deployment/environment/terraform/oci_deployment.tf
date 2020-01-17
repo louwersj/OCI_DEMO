@@ -35,7 +35,7 @@ resource "oci_identity_compartment" "deployment_compartment" {
 resource "oci_core_vcn" "deployment_vcn" {
   cidr_block     = "10.1.1.0/16"
   dns_label      = "${var.source_version}"
-  compartment_id = "${oci_identity_compartment.deployment_compartment}"
+  compartment_id = "${oci_identity_compartment.deployment_compartment.id}"
   display_name   = "${var.source_version}"
   freeform_tags =  {
          application_environment = "test"

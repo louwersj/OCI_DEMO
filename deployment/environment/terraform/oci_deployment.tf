@@ -71,11 +71,11 @@ resource "oci_core_internet_gateway" "deployment_internet_gateway" {
 }
 
 
-# Create a default route table. Do note that you can have multiple route tables.
+# Create a core route table. Do note that you can have multiple route tables.
 # this defaultroute table will route to the deployment_internet_gateway.
 #
 # TODO : check on manage_default_resource_id = "${oci_core_vcn.vcn1.default_route_table_id}"
-resource "oci_core_default_route_table" "default_route_table" {
+resource "oci_core_route_table" "core_route_table" {
   compartment_id = "${oci_identity_compartment.deployment_compartment.id}"
   vcn_id         = "${oci_core_vcn.deployment_vcn.id}"  
   display_name   = "defaultRT_${var.source_version}"

@@ -90,7 +90,7 @@ steps:
 
 
   displayName: 
-    'OCI - Terraform deployment'
+    'OCI - Plan Terraform deployment'
   workingDirectory: 
     "./deployment/environment/terraform/"
   env: 

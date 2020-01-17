@@ -20,7 +20,7 @@ provider "oci" {
 
 # Create the OCI compartment for the deployment. This compartment will be 
 # placed under a root compartment (not per definition the tenancy root.
-resource "oci_identity_compartment" "deployment_root_compartment" {
+resource "oci_identity_compartment" "deployment_compartment" {
     compartment_id = "${var.compartment_ocid}"
     description = "Automatic test compartment for build: ${var.source_version}"
     name = "compartment_${var.source_version}"
@@ -29,5 +29,18 @@ resource "oci_identity_compartment" "deployment_root_compartment" {
            application_name = "OCI_DEMO"
            git_build = "${var.source_version}"
            git_branch = "master"
+   }
+}
+
+resource "oci_core_vcn" "deployment_vcn" {
+  cidr_block     = "10.1.1.0/16"
+  dns_label      = "${var.source_version}"
+  compartment_id = "${oci_identity_compartment.deployment_compartment}"
+  display_name   = "${var.source_version}"
+  freeform_tags =  {
+         application_environment = "test"
+         application_name = "OCI_DEMO"
+         git_build = "${var.source_version}"
+         git_branch = "master"
    }
 }

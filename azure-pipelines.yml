@@ -90,11 +90,9 @@ steps:
 
     echo " "
     echo "**** Running terraform plan to ensure we have a plannend action shown in the logs."
-    terraform deploy
+    terraform apply -auto-approve
 
-    echo " "
-    echo "**** Running terraform plan to ensure we have a plannend action shown in the logs."
-    terraform destroy
+
 
   displayName: 
     'OCI - Plan Terraform deployment'

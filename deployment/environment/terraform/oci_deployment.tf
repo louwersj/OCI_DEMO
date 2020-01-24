@@ -101,3 +101,5 @@ resource "oci_core_subnet" "core_subnet" {
     display_name   = "defaultSubNet_${var.source_version}"
     route_table_id = "${oci_core_route_table.core_route_table.id}"
   }
+
+

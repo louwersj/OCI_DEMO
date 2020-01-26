@@ -31,6 +31,7 @@ resource "oci_identity_compartment" "deployment_compartment" {
            application_name = "OCI_DEMO"
            git_build = "${var.source_version}"
            git_branch = "master"
+           deploy_region = "${var.region}"
    }
 }
 

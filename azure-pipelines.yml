@@ -55,53 +55,89 @@ steps:
 # The following variables are used:
 # TF_VAR_SOURCE_VERSION   : UID based upon the source version in Github
 #                           value is derived from $(Build.SourceVersion)
+#
 # TF_VAR_private_key_path : path to the .pem private key. Value derived 
 #                           from $(pemfile.secureFilePath)
+#
 # TF_VAR_tenancy_ocid .   : UID to identify the tenancy to be used for 
 #                           the deployment. Value is derived from the
 #                           variable $(oci_tenancy_ocid) defined as a 
 #                           Azure DevOps pipeline var.
+#
 # TF_VAR_compartment_ocid : UID to identiy the deployment compartment to
 #                           be used for the deployment. The value is 
 #                           derived from the variable 
 #                           $(oci_compartment_ocid) defined as a Azure 
 #                           DevOps pipeline var.
+#
+# TF_VAR_region .         : Stating the OCI region in which the deploy
+#                           needs to be done. The value is derived 
+#                           from the variable $(oci_region)
+#
+# TF_VAR_private_key_password: To be used to "access" the private key
+#                           for cases where the key is protected by 
+#                           a password. This is not required however
+#                           needs to be present. The value is derived 
+#                           from the variable $(oci_private_key_password)
+#
+# TF_VAR_fingerprint:     : To be used to provide the OCI fingerprint 
+#                           which is used to establish trust between the 
+#                           client and the OCI endpoints.The value is 
+#                           derived from the variable $(oci_fingerprint)
+#
+# TF_VAR_user_ocid .      : To be used to identify the user who will init 
+#                           the terraform interaction. The value is derived 
+#                           from the variable $(oci_user_ocid)
+#
+# TF_VAR_dns_label        : To be used to state the DNS label, this is 
+#                           a shortend version of the Build.SourceVersion
+#                           and will be the first 15 chars of that value.
+#                           We create the variable TF_VAR_dns_label inside 
 
 
 - script: |
 
-    #enable TF_LOG=DEBUG export in case you need to do debugging to the "screen"
+    # Enable TF_LOG=DEBUG export in case you need to do debugging to the "screen". We 
+    # could make this a var driven decission however for now we keep it like this. 
     #export TF_LOG=DEBUG
 
-    # build the DNS flag for the VCN based upon the first 15 chars Build.SourceVersion
+    # Build the DNS flag for the VCN based upon the first 15 chars Build.SourceVersion
     DNSLABEL="$(echo $UUID | cut -c1-15)"
     export TF_VAR_dns_label=$DNSFLAG
     
+    # Running terraform init to ensure all providers are being initialized.
     echo " "
-    echo "**** Running terraform init to ensure all providers are being initialized."
+    echo "****************************************************************************"
+    echo "**** Running terraform init."
     terraform init
 
-
+    # Running terraform version to ensure we have the used version in the logfile.
     echo " "
-    echo "**** Running terraform version to ensure we have the used version in the logfile."
+    echo "****************************************************************************"
+    echo "**** Running terraform version."
     terraform version
 
-
+    # Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible 
     echo " "
-    echo "*** Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible "
+    echo "****************************************************************************"
+    echo "*** Running terraform 0.12upgrade"
     terraform 0.12upgrade -yes 
 
-
+    # Running terraform plan to ensure we have a plannend action shown in the logs.
     echo " "
-    echo "**** Running terraform plan to ensure we have a plannend action shown in the logs."
+    echo "****************************************************************************"
+    echo "**** Running terraform plan."
     terraform plan
 
+    # Running terraform apply to provision to OCI
     echo " "
-    echo "**** Running terraform apply to provision to OCI."
+    echo "**** Running terraform apply."
     terraform apply -auto-approve
 
+    # Running terraform state pull to show the remote state in a JSON representation.
     echo " "
-    echo "**** Running terraform state pull to show the remote state."
+    echo "****************************************************************************"
+    echo "**** Running terraform state pull"
     terraform state pull
 
   displayName: 

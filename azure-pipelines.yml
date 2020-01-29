@@ -70,7 +70,12 @@ steps:
 
 - script: |
 
-    export TF_LOG=DEBUG
+    #enable TF_LOG=DEBUG export in case you need to do debugging to the "screen"
+    #export TF_LOG=DEBUG
+
+    # build the DNS flag for the VCN based upon the first 15 chars Build.SourceVersion
+    DNSLABEL="$(echo $UUID | cut -c1-15)"
+    export TF_VAR_dns_label=$DNSFLAG
     
     echo " "
     echo "**** Running terraform init to ensure all providers are being initialized."

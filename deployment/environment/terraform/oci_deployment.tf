@@ -2,7 +2,10 @@
 variable "tenancy_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
-variable "region" {}
+#variable "region" {}
+variable "region" {
+  default = "eu-frankfurt-1"
+}
 variable "private_key_path" {}
 variable "private_key_password" {}
 variable "compartment_ocid" {}

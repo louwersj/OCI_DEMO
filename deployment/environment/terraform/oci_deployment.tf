@@ -49,7 +49,6 @@ resource "oci_core_vcn" "deployment_vcn" {
   dns_label      = "${var.dns_label}"
   compartment_id = "${oci_identity_compartment.deployment_compartment.id}"
   display_name   = "build_${var.source_version}"
-  is_ipv6enabled = "false"
   freeform_tags =  {
          application_environment = "test"
          application_name = "OCI_DEMO"

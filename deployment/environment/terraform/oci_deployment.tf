@@ -2,10 +2,7 @@
 variable "tenancy_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
-#variable "region" {}
-variable "region" {
-  default = "eu-frankfurt-1"
-}
+variable "region" {}
 variable "private_key_path" {}
 variable "private_key_password" {}
 variable "compartment_ocid" {}
@@ -14,12 +11,12 @@ variable "source_version" {}
 
 # Define the OCI provider.
 provider "oci" {
-  tenancy_ocid = "$var.tenancy_ocid"
-  user_ocid = "$var.user_ocid"
-  fingerprint = "$var.fingerprint"
+  tenancy_ocid = "${var.tenancy_ocid}"
+  user_ocid = "${var.user_ocid}"
+  fingerprint = "${var.fingerprint}"
   region = "${var.region}"
-  private_key_path = "$var.private_key_path"
-  private_key_password = "$var.private_key_password"
+  private_key_path = "${var.private_key_path}"
+  private_key_password = "${var.private_key_password}"
 }
 
 

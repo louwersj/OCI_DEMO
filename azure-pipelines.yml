@@ -97,10 +97,12 @@ steps:
     terraform plan
 
     echo " "
-    echo "**** Running terraform apply to ensure we have a plannend action shown in the logs."
+    echo "**** Running terraform apply to provision to OCI."
     terraform apply -auto-approve
 
-
+    echo " "
+    echo "**** Running terraform state pull to show the remote state."
+    terraform state pull
 
   displayName: 
     'OCI - Plan Terraform deployment'

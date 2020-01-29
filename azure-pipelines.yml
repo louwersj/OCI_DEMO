@@ -87,9 +87,9 @@ steps:
     terraform version
 
 
-    #echo " "
-    #echo "*** Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible "
-    #terraform 0.12upgrade -yes 
+    echo " "
+    echo "*** Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible "
+    terraform 0.12upgrade -yes 
 
 
     echo " "
@@ -97,7 +97,7 @@ steps:
     terraform plan
 
     echo " "
-    echo "**** Running terraform plan to ensure we have a plannend action shown in the logs."
+    echo "**** Running terraform apply to ensure we have a plannend action shown in the logs."
     terraform apply -auto-approve
 
 

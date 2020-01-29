@@ -44,7 +44,7 @@ resource "oci_identity_compartment" "deployment_compartment" {
 #        could be active (deployed) at the same time. We need a dynamic way
 # .      of deciding which CIDR block could be used.
 resource "oci_core_vcn" "deployment_vcn" {
-  cidr_block     = "10.1.1.0/16"
+  cidr_block     = "10.1.1.0/24"
   #dns_label      = "${var.source_version}"
   dns_label      = "${var.dns_label}"
   compartment_id = "${oci_identity_compartment.deployment_compartment.id}"

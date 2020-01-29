@@ -97,7 +97,7 @@ resource "oci_core_route_table" "core_route_table" {
 
 
 resource "oci_core_subnet" "core_subnet" {
-    cidr_block = "10.1.20.0/24"
+    cidr_block = "10.1.1.0/24"
     compartment_id = "${oci_identity_compartment.deployment_compartment.id}"
     vcn_id = "${oci_core_vcn.deployment_vcn.id}"
     display_name   = "defaultSubNet_${var.source_version}"

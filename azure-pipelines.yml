@@ -79,9 +79,9 @@ steps:
     terraform version
 
 
-    echo " "
-    echo "*** Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible "
-    terraform 0.12upgrade -yes 
+    #echo " "
+    #echo "*** Running terraform 0.12upgrade to ensure .tf files are >0.12 compatible "
+    #terraform 0.12upgrade -yes 
 
 
     echo " "

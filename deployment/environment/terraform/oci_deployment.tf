@@ -1,4 +1,4 @@
-# Define the generic variables used in the .tf file. 
+# Define the generic variables used in the .tf file..
 variable "tenancy_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
